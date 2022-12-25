@@ -1,1 +1,148 @@
 hey bro
+komodor
+Customers
+Resources
+Community
+Company
+Pricing
+Receive blog and product updates
+Email*
+RELATED CONTENT
+Common Git Errors, How to Fix, and 5 Ways to Avoid Them
+Git Revert: Rolling Back in GitOps and Kubernetes
+How to Fix ‘failed to push some refs to’ Git Errors
+How to fix ‘ssl certificate problem unable to get local issuer certificate’ Git error
+
+Learning Objective
+ What is the ‘fatal: refusing to merge unrelated histories’ error?
+ Why does ‘fatal: refusing to merge unrelated histories’ happen?
+ How to resolve ‘fatal: refusing to merge unrelated histories’
+ How to prevent ‘fatal: refusing to merge unrelated histories’
+ Kubernetes Troubleshooting with Komodor
+Home Learning Center How to fix ‘fatal: refusing to merge unrelated histories’ Git error
+How to fix ‘fatal: refusing to merge unrelated histories’ Git error
+Daniel Slavin
+Daniel Slavin
+4 min read  December 4th, 2022
+Git
+Troubleshooting
+What is the ‘fatal: refusing to merge unrelated histories’ error?
+The fatal: refusing to merge histories error is a fairly common Git error. It appears when a developer tries to merge two unrelated projects into a single branch.
+
+This error appears when the branch has its commit histories and tags incompatible with the pull request or clone.
+
+Why does ‘fatal: refusing to merge unrelated histories’ happen?
+Here are some common scenarios where fatal: refusing to merge unrelated histories can occur.
+
+You have a new Git repository with some commits. You then try to pull from an existing remote repo. The merge becomes incompatible because the histories for branch and remote pull are different. Git sees the situation as you trying to merge two completely unrelated branches, and it doesn’t know what to do.
+There’s something wrong with the .git directory. It may have been accidentally deleted at some point or got corrupted. This can happen if you’ve cloned or cleaned a project. Here the error occurs because Git doesn’t have the necessary information about your local project’s history.
+The branches are at different HEAD positions when you try to push or pull data from a remote repo and cannot be matched due to a lack of commonality.
+
+
+Detect and fix errors 5x faster
+Komodor monitors your entire K8s stack, identifies issues, and uncovers their root cause.
+
+
+komodor
+How to resolve ‘fatal: refusing to merge unrelated histories’
+There are two ways of solving the fatal: refusing to merge unrelated histories error.
+
+Option 1: Use ‘–allow-unrelated-histories’
+One way to solve the issue is to use the --allow-unrelated-histories git flag.
+
+Here the git command will look something like this: git pull origin master --allow-unrelated-histories.
+
+You can substitute origin with the remote repository you are pulling from. You can also replace the master branch with whatever branch you want the pull request to merge into.
+
+The idea behind --allow-unrelated-histories is that git lets you merge unrelated branches. This git flag works seamlessly when there are no file conflicts.
+
+However, in reality, at least one thing pops up, and you will need to use the normal Git resolution flow to resolve them.
+
+Here is an example of what a common conflict may look like when trying to merge branches:
+
+ Auto-merging package.json
+ CONFLICT (add/add): Merge conflict in package.json
+ Auto-merging package-lock.json
+ CONFLICT (add/add): Merge conflict in package-lock.json
+ Auto-merging README.md
+ CONFLICT (add/add): Merge conflict in README.md
+ Auto-merging .gitignore
+ CONFLICT (add/add): Merge conflict in .gitignore
+ Automatic merge failed; fix conflicts and then commit the result.
+Option 2: unstage, stash, clone, unstash, and then commit
+The alternative (and longer) way of fixing the fatal: refusing to merge unrelated histories issues is to unstage your current commits, stash them, clone your required remote repository, and then place your stashed branch contents into the new clone.
+
+This will ensure that any conflicts that you may encounter in the code are addressed before merging and prevent application errors from occurring.
+To unstage all the files in your last commit, use the following git command: git reset HEAD~.
+
+To stash your unsaved files, use the following git command: git stash.
+
+This will give you a clean working tree to pull your remote repository into. Once you’ve successfully pulled into your branch, you can unstash your files, commit them as a separate commit and resolve any file conflicts that you may have.
+
+To unstash your files, use git pop. This will move the changes stashed and reapplies them to your current working copy.
+
+Alternatively, you can use git stash apply to add the changes to your current working copy of code.
+
+Here is a quick summary of differences between git stash apply and <code”>git pop:
+
+git pop: ‘pops’ the changes from the stash and applies them to the current code
+git stash apply: keeps the changes in the stash and applies the changes to the current code
+How to prevent ‘fatal: refusing to merge unrelated histories’
+The easiest way to prevent the fatal: refusing to merge unrelated histories error is to avoid pulling remote repositories into branches that already have commits on them.
+However, sometimes you just want to keep the commits. One way to prevent the error is to create a brand new branch, pull your required code in, and then manually merge your local branch into your main flow.
+
+Here is a git example of the flow:
+
+# branch A is where your current code is
+# clone in your remote repo into a new and separate branch. 
+# For our purposes, it's branch B
+ ​
+git clone -b [branch] [remote_repo]
+ ​
+# to merge A into B, you need to be on B
+# merge your branches together
+git merge A
+The only thing about merges is that if there is a conflict in the code, there is no way around it other than resolving it as usual.
+Here’s what your merge branch looks like on Git:
+
+          C1---C2---C3 branch A
+                      
+  Ca---Cb---Cc---Ce---Cf branch B
+Kubernetes Troubleshooting with Komodor
+The above guide should help you through the troubleshooting steps you need to follow in order to resolve the fatal: refusing to merge unrelated histories Git error.
+
+This is, of course, just one of many Git errors that you may come across in your K8s logs. Such deceptively minor and often easy-to-miss issues can cause serious issues and detecting them could be time-consuming, stressful, and often downright impossible.
+
+This is why we created Komodor. Acting as a single source of truth (SSOT), Komodor streamlines and shortens k8s troubleshooting processes. Built by devs for devs, Komodor offers:
+
+Change intelligence: Every issue is a result of a change. Within seconds we can help you understand exactly who did what and when.
+In-depth visibility: A complete activity timeline, showing all code and config changes, deployments, alerts, code diffs, pod logs and etc. All within one pane of glass with easy drill-down options.
+Insights into service dependencies: An easy way to understand cross-service changes and visualize their ripple effects across your entire system.
+Seamless notifications: Direct integration with your existing communication channels (e.g., Slack) so you’ll have all the information you need, when you need it.
+If you are interested in checking out Komodor, use this link to sign up for a Free Trial.
+
+Latest Articles
+logo
+Ready to get started? Book a free demo with a Kubernetes expert >>
+
+Company
+About
+Careers
+Press
+Contact us
+Resources
+Blog
+Learning Center
+Resource Library
+Komodor API
+Documentation
+Treasure Chest
+Game: K8s On-Call Hero
+Validkube: K8s YAML Validator
+image
+image
+   
+© Komodor 2022
+
+Privacy Policy
+Terms Of Use
